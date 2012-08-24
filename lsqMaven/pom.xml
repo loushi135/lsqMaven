@@ -120,7 +120,7 @@
   			<java-version>1.6</java-version>
 		</properties>
 	<build>
-		<finalName>SpringMvc</finalName>
+		<finalName>lsqMaven</finalName>
 	<!-- Maven构建时指定JDK的版本 -->
 	<plugins>
             <plugin>
