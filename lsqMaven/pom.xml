@@ -28,6 +28,12 @@
 	   </dependency>
 	   <dependency>
 	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-orm</artifactId>
+	      <version>${spring.version}</version>
+	      <scope>runtime</scope>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
 	      <artifactId>spring-asm</artifactId>
 	      <version>${spring.version}</version>
 	      <scope>runtime</scope>
@@ -93,6 +99,12 @@
       	<version>${spring.version}</version>
       </dependency>
       <dependency>
+      	<groupId>org.aspectj</groupId>
+      	<artifactId>aspectjweaver</artifactId>
+      	<version>${aspectj.version}</version>
+      </dependency>
+      
+      <dependency>
 		 	<groupId>jstl</groupId>
 		    <artifactId>jstl</artifactId>
 	      <version>${jstl.version}</version>
@@ -103,7 +115,88 @@
 		    <version>2.5</version>
 		    <scope>provided</scope>
 	   </dependency>
-	 </dependencies> 
+	   <!-- org.hibernate -->
+	   	<dependency>
+		 <groupId>org.slf4j</groupId>
+		 <artifactId>slf4j-nop</artifactId>
+		 <version>${slf4j.version}</version>
+		</dependency>
+	    <dependency>
+	       <groupId>org.hibernate</groupId>
+	       <artifactId>hibernate-core</artifactId>
+	       <version>${hibernate.version}</version>
+    	</dependency>
+	    <dependency>
+	       <groupId>org.hibernate</groupId>
+	       <artifactId>hibernate-entitymanager</artifactId>
+	       <version>${hibernate.version}</version>
+	    </dependency>
+	     <dependency>
+	       <groupId>org.hibernate</groupId>
+	       <artifactId>hibernate-search</artifactId>
+	       <version>${hibernate.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>org.hibernate</groupId>
+	       <artifactId>hibernate-ehcache</artifactId>
+	       <version>${hibernate.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>org.hibernate</groupId>
+	       <artifactId>hibernate-proxool</artifactId>
+	       <version>${hibernate.version}</version>
+	    </dependency>
+	    
+	    <!-- database driver -->
+	    <dependency>
+	       <groupId>mysql</groupId>
+	       <artifactId>mysql-connector-java</artifactId>
+	       <version>${mysql.version}</version>
+	    </dependency>
+	    
+	    <!--                      jtds                   -->
+	    <dependency>
+	       <groupId>jtds</groupId>
+	       <artifactId>jtds</artifactId>
+	       <version>${jtds.version}</version>
+	    </dependency>
+	     <!--                      javaee                   -->
+	      <dependency>
+	       <groupId>javaee</groupId>
+	       <artifactId>javaee-api</artifactId>
+	       <version>${javaee.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>commons-beanutils</groupId>
+	       <artifactId>commons-beanutils-core</artifactId>
+	       <version>1.8.3</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>org.apache.commons</groupId>
+	       <artifactId>commons-lang3</artifactId>
+	       <version>3.1</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>net.sourceforge.jexcelapi</groupId>
+	       <artifactId>jxl</artifactId>
+	       <version>${jxl.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>org.freemarker</groupId>
+	       <artifactId>freemarker</artifactId>
+	       <version>${freemarker.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>proxool</groupId>
+	       <artifactId>proxool</artifactId>
+	       <version>${proxool.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>proxool</groupId>
+	       <artifactId>proxool-cglib</artifactId>
+	       <version>${proxool.version}</version>
+	    </dependency>
+	 </dependencies>
 	
   
     <repositories>
@@ -112,12 +205,35 @@
 	      <url>http://maven.springframework.org/release/</url>
 	      <snapshots><enabled>false</enabled></snapshots>
 	   </repository>	
+	   <repository>
+		   <id>JBoss repository</id>
+		   <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+            <id>maven</id>
+            <name>maven repository</name>
+            <url>http://search.maven.org/#browse</url>
+        </repository>
+        <repository>
+            <id>maven2-all</id>
+            <name>maven2-all</name>
+            <url>http://repo.fusesource.com/maven2-all</url>
+        </repository>
 	</repositories>
   		<properties>
   			<spring.version>3.1.2.RELEASE</spring.version>
   			<springsecurity.version>3.1.0.RELEASE</springsecurity.version>
   			<jstl.version>1.2</jstl.version>
   			<java-version>1.6</java-version>
+  			<hibernate.version>4.0.0.Final</hibernate.version>
+  			<mysql.version>5.1.21</mysql.version>
+  			<jtds.version>1.2</jtds.version>
+  			<slf4j.version>1.5.2</slf4j.version>
+  			<javaee.version>5</javaee.version>
+  			<jxl.version>2.6.12</jxl.version>
+  			<freemarker.version>2.3.19</freemarker.version>
+  			<proxool.version>0.9.1</proxool.version>
+  			<aspectj.version>1.7.0</aspectj.version>
 		</properties>
 	<build>
 		<finalName>lsqMaven</finalName>
