@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"
+        default-autowire="byName">
+        
+   	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="net.sourceforge.jtds.jdbc.Driver"></property> 
+		<property name="driverUrl" value="jdbc:jtds:sqlserver://localhost:1433/gzgl"></property>
+		<property name="user" value="sa"></property>
+		<property name="password" value="sa"></property>
+		<property name="alias" value="myDataSource"></property>
+		<property name="testBeforeUse" value="true"></property>
+   		<property name="houseKeepingTestSql" value="select getdate()"/> 
+   		<property name="maximumConnectionCount" value="10000"></property>
+   		<property name="minimumConnectionCount" value="10"></property>
+   		<property name="maximumActiveTime" value="60000"></property>
+   		<property name="simultaneousBuildThrottle" value="1000"></property>
+   		<property name="prototypeCount" value="10"></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+				<prop key="hibernate.cache.use_second_level_cache">
+					true
+				</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<prop key="hibernate.search.default.directory_provider">filesystem</prop>
+                <prop key="hibernate.search.default.indexBase">/indexed</prop> 
+                <!-- <prop key="hibernate.search.autoregister_listeners">true</prop>-->
+                <prop key="hibernate.jdbc.use_scrollable_resultset">false</prop> 
+                <!--  <prop key="hibernate.search.indexing_strategy">manual</prop> -->
+				<!--
+				<prop key="hibernate.cache.default_cache_concurrency_strategy">read-write</prop> 
+				<prop key="hibernate.pool_alias">myDataSource</prop>
+			    <prop key="hibernate.proxool.xml">proxool.xml</prop>
+			     <prop key="hibernate.connection.provider_class">
+			    	 org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider
+			    </prop>
+				 -->
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<value>com.smsf.bean</value>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		abstract="false" lazy-init="default" autowire="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 事务管理配置 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="do*" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config proxy-target-class="true">
+		<aop:advisor
+			pointcut="execution(* com.smsf.service.impl.*ServiceImpl.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	
+	<!-- 扫描并自动装配 -->
+	<context:component-scan base-package="com.smsf.dao" />
+	<context:component-scan base-package="com.smsf.service" />
+	
+	<!--  <tx:annotation-driven/>-->
+</beans>
