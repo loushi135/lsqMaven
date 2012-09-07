@@ -77,7 +77,7 @@
 			</props>
 		</property>
 		<property name="packagesToScan">
-			<value>com.smsf.bean</value>
+			<value>com.lsq.model</value>
 		</property>
 	</bean>
 
@@ -100,13 +100,13 @@
 	</tx:advice>
 	<aop:config proxy-target-class="true">
 		<aop:advisor
-			pointcut="execution(* com.smsf.service.impl.*ServiceImpl.*(..))"
+			pointcut="execution(* com.lsq.service.impl.*ServiceImpl.*(..))"
 			advice-ref="txAdvice" />
 	</aop:config>
 	
 	<!-- 扫描并自动装配 -->
-	<context:component-scan base-package="com.smsf.dao" />
-	<context:component-scan base-package="com.smsf.service" />
+	<context:component-scan base-package="com.lsq.dao" />
+	<context:component-scan base-package="com.lsq.service" />
 	
 	<!--  <tx:annotation-driven/>-->
 </beans>

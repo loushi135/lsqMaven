@@ -9,10 +9,12 @@
 <link href="${ctx}/static/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet" />
 <link href="${ctx}/static/jquery-validation/1.9.0/validate.css" type="text/css" rel="stylesheet" />
 <link href="${ctx}/static/jquery-ui/css/jquery-ui-1.8.21.custom.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/static/custom/css/style.css" type="text/css"  rel="stylesheet"/>
 <link href="${ctx}/static/custom/css/mainstyle.css" type="text/css"  rel="stylesheet"/>
 <link href="${ctx}/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" />
 	
-<script src="${ctx}/static/jquery/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/jquery/jquery-1.8.1.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/jquery-validation/1.9.0/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/jquery-validation/1.9.0/messages_cn.js" type="text/javascript"></script>
 <script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

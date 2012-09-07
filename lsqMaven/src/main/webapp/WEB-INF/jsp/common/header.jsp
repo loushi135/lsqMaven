@@ -1,6 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/WEB-INF/jsp/common/taglib.jsp"%>
 <div class="top_bg">
 	<div class="floatL">
-		<img src="image/top_pic1.jpg" />
+		<img src="${ctx}/static/custom/images/top_pic1.jpg" />
 	</div>
 	<div class="top_menu">
 		<li class="top_menu_icon1">

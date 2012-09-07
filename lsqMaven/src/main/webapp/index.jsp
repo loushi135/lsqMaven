@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,11 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    	<form action="<%=request.getContextPath() %>/hello/helloWorld.do">
-    		username : <input type="text" name="username" ><br/>
-    		password : <input type="password" name ="password"/><br/>
-    		fdsgfsd
-    		<input type="submit" value="登陆">
-    	</form>
+    This is my JSP page. <br>
+    <jsp:forward page="${ctx }/login/toLogin.do"></jsp:forward>
   </body>
 </html>

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp"%>
 <div class="leftmenu">
 	<div>
-		<img src="image/menu_title1.gif" />
+		<img src="${ctx}/static/custom/images/menu_title1.gif" />
 	</div>
 	
 		<c:if test="${not empty roleMenuList}">
@@ -39,10 +39,5 @@
 	   }else{
 		  $("#"+obj).attr("style","display:none")
 	   }
-	 //$(".leftmenu2").attr("style","display:none");
-	 // $("#"+obj).attr("style","display:");
-	// var display = document.getElementById(obj).style.display;
-	 //document.getElementById(obj).style.display=(display=="block"?"none":"block");
-	   
    }
 </script>

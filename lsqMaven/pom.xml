@@ -186,6 +186,11 @@
 	       <artifactId>proxool-cglib</artifactId>
 	       <version>${proxool.version}</version>
 	    </dependency>
+	    <dependency>
+	       <groupId>cglib</groupId>
+	       <artifactId>cglib-nodep</artifactId>
+	       <version>${cglib.version}</version>
+	    </dependency>
 	 </dependencies>
 	
   
@@ -224,6 +229,7 @@
   			<freemarker.version>2.3.19</freemarker.version>
   			<proxool.version>0.9.1</proxool.version>
   			<aspectj.version>1.7.0</aspectj.version>
+  			<cglib.version>2.2.2</cglib.version>
     		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		</properties>
 	<build>
