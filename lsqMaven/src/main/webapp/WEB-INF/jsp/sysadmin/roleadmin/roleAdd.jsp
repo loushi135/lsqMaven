@@ -4,7 +4,6 @@
 <head>
 	<title>附一院医院自助管理系统</title>
 	<%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
-	<script type="text/javascript" src="${ctx}/static/custom/js/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="${ctx}/static/zTree3/js/jquery.ztree.core-3.1.min.js"></script>
 	<script type="text/javascript" src="${ctx}/static/zTree3/js/jquery.ztree.excheck-3.1.min.js"></script>
 	<script type="text/javascript" src="${ctx}/static/zTree3/js/jquery.ztree.exedit-3.1.js"></script>

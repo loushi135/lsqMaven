@@ -4,7 +4,6 @@
 <head>
 	<title></title>
 	<%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
-	<script type="text/javascript" src="${ctx}/static/custom/js/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="${ctx}/static/custom/js/operadmin.js"></script>
 	<script type="text/javascript" src="${ctx}/static/custom/js/common.js"></script>
 </head>

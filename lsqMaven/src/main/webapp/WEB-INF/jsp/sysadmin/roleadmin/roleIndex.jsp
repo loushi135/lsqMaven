@@ -4,7 +4,6 @@
 <head>
 	<title>附一院医院自助管理系统</title>
 	<%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
-	<script type="text/javascript" src="${ctx}/static/custom/js/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="${ctx}/static/custom/js/roleadmin.js"></script>
     <script type="text/javascript" src="${ctx}/static/custom/js/common.js"></script>
 </head>

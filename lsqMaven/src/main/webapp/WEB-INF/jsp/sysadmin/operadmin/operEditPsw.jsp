@@ -5,7 +5,6 @@
 	<title></title>
 	<%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
     <script type="text/javascript" src="${ctx}/static/custom/js/common.js"></script>
-	<script type="text/javascript" src="${ctx}/static/custom/js/jquery-1.6.2.min.js"></script>
 </head>
 <body>
 <div class="dataTable2_content">
