@@ -15,7 +15,7 @@
 					<c:if test="${not empty roleMenu.menu.childList}">
 					<div class="leftmenu2"  id="${roleMenu.menu.menuId}" style="display: none;">
 						   <c:forEach items="${roleMenu.menu.childList}" var="childMenu">
-								<li onclick="toUrlForRight(this,'${childMenu.menuUrl}','${childMenu.menuId}')">
+								<li onclick="toUrlForRight(this,'${ctx}/${childMenu.menuUrl}','${childMenu.menuId}')">
 									${childMenu.menuName}
 								</li>
 						   </c:forEach>

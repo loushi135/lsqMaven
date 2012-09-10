@@ -4,7 +4,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.lsq.common.exception.ServiceException;
@@ -13,7 +19,7 @@ import com.lsq.model.Oper;
 import com.lsq.service.OperService;
 
 @Service("operService")
-public class OperServiceImpl extends BaseServiceImpl implements OperService {
+public class OperServiceImpl extends BaseServiceImpl implements OperService,UserDetailsService {
 
 	@Autowired
 	private OperDao operDao;
@@ -63,6 +69,17 @@ public class OperServiceImpl extends BaseServiceImpl implements OperService {
 		}catch (Exception e) {
 			throw new ServiceException(getClass(), e.getMessage());
 		}
+	}
+	@Override
+	public UserDetails loadUserByUsername(final String username)
+			throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		DetachedCriteria dc = DetachedCriteria.forClass(Oper.class);
+		dc.add(Restrictions.eq("loginname",username));
+		Oper oper = (Oper)operDao.queryOne(dc);
+//		if(oper!=null){
+//		}
+		return oper;
 	}
 
 }

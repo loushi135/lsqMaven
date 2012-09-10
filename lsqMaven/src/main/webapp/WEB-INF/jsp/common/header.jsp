@@ -12,7 +12,7 @@
 			<a href="javascript:void(0)" onclick="toEditPsw()">修改密码</a>
 		</li>
 		<li class="top_menu_icon2">
-			<a href="systemAdminAction_logout.action">退出系统</a>
+			<a href="${ctx }/login/logout.do">退出系统</a>
 		</li>
 	</div>
 </div>

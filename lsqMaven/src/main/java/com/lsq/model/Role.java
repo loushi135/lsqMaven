@@ -20,9 +20,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.springframework.security.core.GrantedAuthority;
 @Table(name="Role")
 @Entity
-public class Role extends BaseTO {
+public class Role extends BaseTO implements GrantedAuthority {
 
 	/**
 	 * 
@@ -113,6 +114,10 @@ public class Role extends BaseTO {
 	public void setOperList(List<Oper> operList) {
 		this.operList = operList;
 	}
-	
-	
+
+	@Override
+	public String getAuthority() {
+		// TODO Auto-generated method stub
+		return roleName;
+	}
 }

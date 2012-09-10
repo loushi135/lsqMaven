@@ -4,7 +4,7 @@ package com.lsq.common.util;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 提供高精度的运算支持.

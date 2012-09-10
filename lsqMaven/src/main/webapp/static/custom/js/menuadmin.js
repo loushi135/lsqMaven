@@ -19,11 +19,11 @@ var status = 0;//0表示添加子节点,1表示编辑节点（按钮提交）
 $(document).ready(function(){
 		$.ajax({
 			type:"post",
-			url:"systemAdminAction_getMenuJson.action",
+			url:_ctx+"/system/getMenuJson.do?content=json",
 			async:false,
 			dataType:"json",
 			success:function(jsonvalue){
-								var zNodes = jsonvalue;
+							var zNodes = jsonvalue.jsonData;
 							zTree=$.fn.zTree.init($("#treeDemo"), setting,zNodes);
 				   }
 		  });
@@ -37,18 +37,18 @@ $(document).ready(function(){
 			var menuOrder = $("#menuOrder").val();
 			var menuId = tmp[0].id;
 			if(status==0){
-			   url = "systemAdminAction_addMenu.action";
-			   sendData = "menu.menuName="+menuName+"&menu.menuUrl="+menuUrl+"&menu.menuOrder="+menuOrder+"&parentMenuId="+menuId+"&now="+new Date();
+			   url = _ctx+"/system/addMenu.do?content=json";
+			   sendData = "menuName="+menuName+"&menuUrl="+menuUrl+"&menuOrder="+menuOrder+"&parentMenuId="+menuId+"&now="+new Date();
 			   //sendData = {menu.menuName:menuName,menu.menuUrl:menuUrl,menu.menuOrder:menuOrder,parentMenuId:menuId,now:new Date()};
 			}else{
-			   url = "systemAdminAction_modifyMenu.action";
-			   sendData = "menu.menuName="+menuName+"&menu.menuUrl="+menuUrl+"&menu.menuOrder="+menuOrder+"&menu.menuId="+menuId+"&now="+new Date();
+			   url = _ctx+"/system/modifyMenu.do?content=json";
+			   sendData = "menuName="+menuName+"&menuUrl="+menuUrl+"&menuOrder="+menuOrder+"&menuId="+menuId+"&now="+new Date();
 			   //sendData = {menu.menuName:menuName,menu.menuUrl:menuUrl,menu.menuOrder:menuOrder,menu.menuId:menuId,now:new Date()};
 			}
 			$.ajax({type:"post",url:url,async:false,data:sendData,dataType:"json",success:function(jsonvalue){
-				if(jsonvalue!=null&&jsonvalue.success){
+				if(jsonvalue!=null&&jsonvalue.jsonData.success){
 					if(status==0){
-						var newNode = [{name:menuName,id:jsonvalue.menuId,menuUrl:menuUrl,menuOrder:menuOrder}];
+						var newNode = [{name:menuName,id:jsonvalue.jsonData.menuId,menuUrl:menuUrl,menuOrder:menuOrder}];
 						zTree.addNodes(tmp[0],newNode);
 						tmp[0].isParent = true;
 						zTree.refresh();
@@ -61,7 +61,7 @@ $(document).ready(function(){
 					}
 					toClear();
 				}
-				    alert(jsonvalue.message);
+				    alert(jsonvalue.jsonData.message);
 			  }
 			});
 		});
@@ -129,17 +129,17 @@ $(document).ready(function(){
 		}
 		var isDelete = window.confirm("确认要删除么");
 		if(isDelete){
-			var url = "systemAdminAction_deleteMenu.action";
+			var url = _ctx+"/system/deleteMenu.do?content=json";
 			var menuId = tmp[0].id;
-			var sendData = "menu.menuId="+menuId+"&now="+new Date();
+			var sendData = "menuId="+menuId+"&now="+new Date();
 			//var sendData = {menu.menuId:menuId,now:new Date()};
 			$.ajax({type:"post",url:url,async:false,data:sendData,dataType:"json",success:function(jsonvalue){
-				if(jsonvalue!=null&&jsonvalue.success){
+				if(jsonvalue!=null&&jsonvalue.jsonData.success){
 					//tmp[0].parentNode.isParent = false;
 					zTree.removeNode(tmp[0]);
 					zTree.refresh();
 				}
-				alert(jsonvalue.message);
+				alert(jsonvalue.jsonData.message);
 			  }
 			});
 		}

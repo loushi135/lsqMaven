@@ -21,12 +21,57 @@
     <!-- HandlerAdapter   
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>  
    -->
-   <!-- 视图解释类org.springframework.web.servlet.view.InternalResourceViewResolver -->  
-   <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">  
-    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
-    <property name="prefix" value="/WEB-INF/jsp/"/>  
-    <property name="suffix" value=".jsp"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->  
-   </bean>  
+     
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter"/>
+			</util:list>
+		</property>
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean> -->
+	<!-- 混合多种视图技术 -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+		  p:order="0"
+		  p:defaultContentType="text/html"
+		  p:ignoreAcceptHeader="true"
+		  p:favorPathExtension="false"
+		  p:favorParameter="true"
+		  p:parameterName="content"
+	>
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html"></entry>
+				<entry key="xml" value="application/xml"></entry>
+				<entry key="json" value="application/json"></entry>
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" p:renderedAttributes="jsonData"></bean>
+				<!-- <bean class="org.springframework.web.servlet.view.xml.MarshallingView" p:modelKey="listMap" p:marshaller-ref="xmlMarshaller"></bean> -->
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="xmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="streamDriver">
+			<bean class="com.thoughtworks.xstream.io.xml.StaxDriver"></bean>
+		</property>
+	</bean> -->
+	<!-- 视图解释类org.springframework.web.servlet.view.InternalResourceViewResolver -->  
+	<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="10" ></bean> -->
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">  
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
+	    <property name="prefix" value="/WEB-INF/jsp/"/>  
+	    <property name="suffix" value=".jsp"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->  
+    </bean>
     <!-- 对静态资源文件的访问  方案二 （二选一）
 	<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>  
 	<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>  

@@ -1,10 +1,10 @@
 package com.lsq.model;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Oper entity.
@@ -27,7 +30,7 @@ import org.hibernate.annotations.NotFoundAction;
  */
 @Table(name="Oper")
 @Entity
-public class Oper extends BaseTO implements java.io.Serializable {
+public class Oper extends BaseTO implements java.io.Serializable,UserDetails {
 
 	// Fields
 
@@ -217,6 +220,47 @@ public class Oper extends BaseTO implements java.io.Serializable {
 
 	public void setOperlogs(Set<Operlog> operlogs) {
 		this.operlogs = operlogs;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		Set<GrantedAuthority> rights = new HashSet<GrantedAuthority>();
+		rights.add(new GrantedAuthorityImpl("ROLE_PUBLIC"));
+		return rights;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return loginname;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		if(status==1){
+			return true;
+		}
+		return false;
 	}
 
 	

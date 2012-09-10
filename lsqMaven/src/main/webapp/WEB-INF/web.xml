@@ -33,7 +33,7 @@
 		<param-name>contextConfigLocation</param-name>  
 	    <param-value>
 	   		classpath:applicationContext.xml
-			
+			classpath:applicationContext-security.xml
 	    </param-value> 
 	</context-param>
 	 <!-- hibernate配置 -->
@@ -57,22 +57,8 @@
 		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!--                          proxool start                          
-	<context-param>   
-	    <param-name>xmlFile</param-name>   
-	    <param-value>WEB-INF/spring/proxool.xml</param-value>   
- 	 </context-param>
-  	<listener>   
-    -->
-   		 <!-- 位置在spring的监听器之前
-		<listener-class>cc.smh.common.listener.ProxoolListener</listener-class>   
-	</listener> 
-	-->
-	<!--  <listener>
-			<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-		</listener>
-	-->
-	<!-- 这里是为了监视连接池的状态 wjhlangzi-->
+	<!--                          proxool start  -->                        
+	<!-- 这里是为了监视连接池的状态 -->
 	<servlet>
  	 <servlet-name>proxool</servlet-name>
   	<servlet-class>
@@ -139,7 +125,7 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
-	  <!-- 
+	<!-- spring security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -149,7 +135,12 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- -->
+ 	
+ 	<!-- spring security 获取session生命周期 -->
+ 	<listener>
+ 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+ 	</listener>
+ 	
  	<jsp-config>
         <taglib>
         	<taglib-uri>/WEB-INF/tld/myFunc.tld</taglib-uri>

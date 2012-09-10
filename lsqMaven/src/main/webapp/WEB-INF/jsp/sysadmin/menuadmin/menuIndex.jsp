@@ -28,7 +28,7 @@
       </tr>
       <tr>
         <td align="right" nowrap="nowrap">菜单URL：</td>
-        <td nowrap="nowrap"><input type="text" name="textfield2" id="menuUrl" class="input250" /></td>
+        <td nowrap="nowrap"><input type="text" name="menuUrl" id="menuUrl" class="input250"  /></td>
       </tr>
       <tr>
         <td align="right" nowrap="nowrap">菜单排序：</td>
